@@ -1,0 +1,18 @@
+{
+  "name": "gfoas-recipe-scraper",
+  "version": "1.0.0",
+  "main": "main.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel main.js",
+    "build": "parcel build main.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "parcel-bundler": "^1.12.3",
+    "sass": "^1.26.8"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.10.1"
+  }
+}

@@ -1,0 +1,41 @@
+//main.scss
+
+body {
+  box-sizing: border-box;
+  *,
+  *:after,
+  *:before {
+    box-sizing: inherit;
+  }
+}
+.recipe-scraper-admin-page {
+  padding-right: 15px;
+  h2 {
+    margin-top: 5px;
+  }
+  section {
+    background: white;
+    padding: 20px;
+  }
+  .scrape-recipe-form {
+    label {
+      display: block;
+    }
+    fieldset {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+//layout
+.layout {
+  display: flex;
+  .sidebar {
+    margin-right: 40px;
+  }
+}
+
+//TABS
+section:not([data-active]) {
+  display: none;
+}
