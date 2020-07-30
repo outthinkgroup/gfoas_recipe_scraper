@@ -1,0 +1,26 @@
+name: DEPLOY
+
+on: 
+  pull_request:
+      branches:
+       - production
+
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@2.0.0
+      with:
+        port: 22
+        method: sftp
+      env:
+        FTP_SERVER: 35.245.151.137
+        FTP_USERNAME: ${{ secrets.SERVER_USER }}
+        FTP_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+        REMOTE_DIR: /www/${{secrets.SERVER_USER}}_933/public/wp-content/plugins/GFOAS-recipe-scraper
+        ARGS: --delete
+        PORT: 36541
+        METHOD: sftp
