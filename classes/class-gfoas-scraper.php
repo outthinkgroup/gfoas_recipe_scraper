@@ -78,7 +78,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
         update_field('cook_time', $data->cook_time , $post_id);
         $this->set_featured_image( $data->image , $post_id);
         update_field('yield', $data->yield , $post_id);
-        $this->update_repeater_field(['ingredients', 'ingredient'], $data->ingredients, $post_id);
+        update_field('ingredients', $data->ingredients, $post_id);
         $this->update_repeater_field(['steps', 'step'], $data->steps, $post_id);
         
         return $post_id;
@@ -157,7 +157,7 @@ class Recipe {
     $image_id = new Save_Media($acf->image_upload, $this->slug);
     $this->image = $image_id->get_image_id();
     $this->yield = $acf->yield;
-    $this->ingredients = $this->html_to_array($acf->ingredient_text);
+    $this->ingredients = $acf->ingredient_text;
     $this->steps = $this->clean_up_steps($acf->step);
     $this->categories = $this->set_categories($body->categories);
   }
@@ -207,28 +207,6 @@ class Recipe {
     }
 
     return $returned_category_ids;
-  }
-
-  private function html_to_array($html){
-    if(strpos($html, '</p>')){
-
-      $split_by_closing_tag = explode('</p>', $html);
-      $list = [];
-      foreach($split_by_closing_tag as $item){
-
-        $list_item = str_replace('<p>','',$item);
-        
-        //removes '' left over from the last '</p>'
-        if(strlen($list_item) > 1){
-          $list[] = $list_item;
-        }
-      }
-      
-      return $list;
-      
-    } else {
-      return $html;
-    }
   }
 
   private function clean_up_steps($steps){
