@@ -19,7 +19,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       if(count($this->error_obj)!==0){
         echo json_encode($error_obj);
       }else{
-        echo 'success';
+        echo json_encode(['message'=>'success', 'link'=> get_edit_post_link($recipe_post_id)]);
       }
 
       die();

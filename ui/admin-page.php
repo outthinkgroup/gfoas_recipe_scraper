@@ -46,6 +46,10 @@
           <button class="button-primary" type="submit">Pull Recipe</button>
 
         </form>
+        <div class="links">
+          <h3>Edit Recipes</h3>
+          <p class="temp">no recipes imported yet</p>
+        </div>
       </section>
 
 

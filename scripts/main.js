@@ -1,8 +1,8 @@
 //main.js
 window.addEventListener("DOMContentLoaded", initSingleRecipeScraper);
 function initSingleRecipeScraper() {
-	if(!document.querySelector('.recipe-scraper-admin-page')) return;
-	   
+  if (!document.querySelector(".recipe-scraper-admin-page")) return;
+
   const form = document.querySelector(
     '.recipe-scraper-admin-page [data-tab="single-import"] form'
   );
@@ -37,13 +37,22 @@ function initSingleRecipeScraper() {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body,
-    }).then((res) => res);
+    }).then((res) => res.json());
     button.innerText =
-      res.status === 200
+      res.message === "success"
         ? showSuccess(button, idleButtonText)
         : "Error, try again";
     recipe.value = "";
     youtube.value = "";
+    if (res.message === "success") {
+      const links = document.querySelector(".links");
+      if (links.querySelector(".temp")) {
+        links.removeChild(links.querySelector(".temp"));
+      }
+      const newLink = document.createElement("div");
+      newLink.innerHTML = ` <a href="${res.link}" style="padding:10px 0; display:inline-block;">${res.link}</a>`;
+      links.appendChild(newLink);
+    }
   }
 }
 
