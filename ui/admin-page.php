@@ -50,6 +50,8 @@
           <h3>Edit Recipes</h3>
           <p class="temp">no recipes imported yet</p>
         </div>
+        <div class="errors">
+        </div>
       </section>
 
 

@@ -14,11 +14,12 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       $youtube_url = $_POST['youtube'];
       
       $recipe_post_id = $this->pull_and_save_recipe($recipe_url);
-      update_field('youtube_url', $youtube_url, $recipe_post_id);
       
       if(count($this->error_obj)!==0){
-        echo json_encode($error_obj);
+        // var_dump($this->error_obj);
+        echo json_encode(['message'=> $this->error_obj]);
       }else{
+        update_field('youtube_url', $youtube_url, $recipe_post_id);
         echo json_encode(['message'=>'success', 'link'=> get_edit_post_link($recipe_post_id)]);
       }
 
@@ -34,6 +35,10 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
     private function pull_and_save_recipe($url){
 
       $slug = $this->get_slug($url);
+
+      if($this->recipe_exists($slug)){
+        $this->error_obj[] = 'error: Recipe already exists';
+      }
 
       $recipe = $this->fetch_recipe($slug);
       
@@ -120,6 +125,18 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       $success = gettype($attachment_id) === 'integer';
       if(!$success){
         $this->error_obj[] = 'error: couldn\'t set the image as the featured image'; 
+      }
+    }
+
+    private function recipe_exists($slug){
+      $existing_posts = get_posts([
+        'post_type'=>'recipe',
+        'post_name' =>  $slug
+      ]);
+      if(is_array($existing_posts) && count($existing_posts) > 0){
+        return true;
+      }else{
+        return false;
       }
     }
 

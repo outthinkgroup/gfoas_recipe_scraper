@@ -14,6 +14,10 @@ function initSingleRecipeScraper() {
 
   async function sendUrlToScrape(e) {
     e.preventDefault();
+    //clears any errors
+    const errorBlock = document.querySelector(".errors");
+    errorBlock.innerHTML = "";
+
     const form = e.target;
 
     const recipe = form.querySelector("#recipe");
@@ -38,10 +42,11 @@ function initSingleRecipeScraper() {
       },
       body,
     }).then((res) => res.json());
-    button.innerText =
-      res.message === "success"
-        ? showSuccess(button, idleButtonText)
-        : "Error, try again";
+    if (res.message === "success") {
+      temporaryMessage(button, "success", idleButtonText);
+    } else {
+      temporaryMessage(button, "Error, Please Try Again", idleButtonText);
+    }
     recipe.value = "";
     youtube.value = "";
     if (res.message === "success") {
@@ -52,15 +57,28 @@ function initSingleRecipeScraper() {
       const newLink = document.createElement("div");
       newLink.innerHTML = ` <a href="${res.link}" style="padding:10px 0; display:inline-block;">${res.link}</a>`;
       links.appendChild(newLink);
+    } else {
+      const errorBlock = document.querySelector(".errors");
+
+      const errorString = `<pre>${JSON.stringify(res.message, null, 2)}</pre>`;
+      temporaryMessage(errorBlock, errorString, "", 1000000);
     }
   }
 }
 
-function showSuccess(el, idleText) {
+function temporaryMessage(el, msg, idleText, time = 2000, html = false) {
+  if (html) {
+    el.innerHTML = msg;
+  } else {
+    el.innerHTML = msg;
+  }
   setTimeout(() => {
-    el.innerText = idleText;
-  }, 2000);
-  return "success";
+    if (html) {
+      el.innerHTML = idleText;
+    } else {
+      el.innerText = idleText;
+    }
+  }, time);
 }
 
 const toQueryString = (data) => {
