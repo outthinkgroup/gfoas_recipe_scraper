@@ -1,2 +1,38 @@
-body{box-sizing:border-box}body *,body :after,body :before{box-sizing:inherit}.recipe-scraper-admin-page{padding-right:15px}.recipe-scraper-admin-page h2{margin-top:5px}.recipe-scraper-admin-page section{background:#fff;padding:20px}.recipe-scraper-admin-page .scrape-recipe-form label{display:block}.recipe-scraper-admin-page .scrape-recipe-form fieldset{margin-bottom:30px}.layout{display:flex}.layout .sidebar{margin-right:40px}section:not([data-active]){display:none}
+body {
+  box-sizing: border-box;
+}
+body *,
+body *:after,
+body *:before {
+  box-sizing: inherit;
+}
+
+.recipe-scraper-admin-page {
+  padding-right: 15px;
+}
+.recipe-scraper-admin-page h2 {
+  margin-top: 5px;
+}
+.recipe-scraper-admin-page section {
+  background: white;
+  padding: 20px;
+}
+.recipe-scraper-admin-page .scrape-recipe-form label {
+  display: block;
+}
+.recipe-scraper-admin-page .scrape-recipe-form fieldset {
+  margin-bottom: 30px;
+}
+
+.layout {
+  display: flex;
+}
+.layout .sidebar {
+  margin-right: 40px;
+}
+
+section:not([data-active]) {
+  display: none;
+}
+
 /*# sourceMappingURL=/main.css.map */
