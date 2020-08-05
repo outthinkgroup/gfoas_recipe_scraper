@@ -19,7 +19,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       if(count($this->error_obj)!==0){
         echo json_encode($error_obj);
       }else{
-        echo 'success';
+        echo json_encode(['message'=>'success', 'link'=> get_edit_post_link($recipe_post_id)]);
       }
 
       die();
@@ -207,29 +207,6 @@ class Recipe {
     }
 
     return $returned_category_ids;
-  }
-
-  private function html_to_array($html){
-    // filters the_content()
-    if(strpos($html, '</p>')){
-
-      $split_by_closing_tag = explode('</p>', $html);
-      $list = [];
-      foreach($split_by_closing_tag as $item){
-
-        $list_item = str_replace('<p>','',$item);
-        
-        //removes '' left over from the last '</p>'
-        if(strlen($list_item) > 1){
-          $list[] = $list_item;
-        }
-      }
-      
-      return $list;
-      
-    } else {
-      return $html;
-    }
   }
 
   private function clean_up_steps($steps){
