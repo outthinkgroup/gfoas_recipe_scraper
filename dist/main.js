@@ -117,7 +117,261 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
+})({"node_modules/@babel/runtime/helpers/arrayLikeToArray.js":[function(require,module,exports) {
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+},{}],"node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":[function(require,module,exports) {
+var arrayLikeToArray = require("./arrayLikeToArray");
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+
+module.exports = _arrayWithoutHoles;
+},{"./arrayLikeToArray":"node_modules/@babel/runtime/helpers/arrayLikeToArray.js"}],"node_modules/@babel/runtime/helpers/iterableToArray.js":[function(require,module,exports) {
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+},{}],"node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":[function(require,module,exports) {
+var arrayLikeToArray = require("./arrayLikeToArray");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
+},{"./arrayLikeToArray":"node_modules/@babel/runtime/helpers/arrayLikeToArray.js"}],"node_modules/@babel/runtime/helpers/nonIterableSpread.js":[function(require,module,exports) {
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableSpread;
+},{}],"node_modules/@babel/runtime/helpers/toConsumableArray.js":[function(require,module,exports) {
+var arrayWithoutHoles = require("./arrayWithoutHoles");
+
+var iterableToArray = require("./iterableToArray");
+
+var unsupportedIterableToArray = require("./unsupportedIterableToArray");
+
+var nonIterableSpread = require("./nonIterableSpread");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+},{"./arrayWithoutHoles":"node_modules/@babel/runtime/helpers/arrayWithoutHoles.js","./iterableToArray":"node_modules/@babel/runtime/helpers/iterableToArray.js","./unsupportedIterableToArray":"node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js","./nonIterableSpread":"node_modules/@babel/runtime/helpers/nonIterableSpread.js"}],"node_modules/@babel/runtime/helpers/classCallCheck.js":[function(require,module,exports) {
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+},{}],"node_modules/@babel/runtime/helpers/createClass.js":[function(require,module,exports) {
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+},{}],"node_modules/@babel/runtime/helpers/setPrototypeOf.js":[function(require,module,exports) {
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+},{}],"node_modules/@babel/runtime/helpers/inherits.js":[function(require,module,exports) {
+var setPrototypeOf = require("./setPrototypeOf");
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
+},{"./setPrototypeOf":"node_modules/@babel/runtime/helpers/setPrototypeOf.js"}],"node_modules/@babel/runtime/helpers/typeof.js":[function(require,module,exports) {
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+},{}],"node_modules/@babel/runtime/helpers/assertThisInitialized.js":[function(require,module,exports) {
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+},{}],"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js":[function(require,module,exports) {
+var _typeof = require("../helpers/typeof");
+
+var assertThisInitialized = require("./assertThisInitialized");
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+},{"../helpers/typeof":"node_modules/@babel/runtime/helpers/typeof.js","./assertThisInitialized":"node_modules/@babel/runtime/helpers/assertThisInitialized.js"}],"node_modules/@babel/runtime/helpers/getPrototypeOf.js":[function(require,module,exports) {
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+},{}],"node_modules/@babel/runtime/helpers/isNativeFunction.js":[function(require,module,exports) {
+function _isNativeFunction(fn) {
+  return Function.toString.call(fn).indexOf("[native code]") !== -1;
+}
+
+module.exports = _isNativeFunction;
+},{}],"node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js":[function(require,module,exports) {
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+module.exports = _isNativeReflectConstruct;
+},{}],"node_modules/@babel/runtime/helpers/construct.js":[function(require,module,exports) {
+var setPrototypeOf = require("./setPrototypeOf");
+
+var isNativeReflectConstruct = require("./isNativeReflectConstruct");
+
+function _construct(Parent, args, Class) {
+  if (isNativeReflectConstruct()) {
+    module.exports = _construct = Reflect.construct;
+  } else {
+    module.exports = _construct = function _construct(Parent, args, Class) {
+      var a = [null];
+      a.push.apply(a, args);
+      var Constructor = Function.bind.apply(Parent, a);
+      var instance = new Constructor();
+      if (Class) setPrototypeOf(instance, Class.prototype);
+      return instance;
+    };
+  }
+
+  return _construct.apply(null, arguments);
+}
+
+module.exports = _construct;
+},{"./setPrototypeOf":"node_modules/@babel/runtime/helpers/setPrototypeOf.js","./isNativeReflectConstruct":"node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js"}],"node_modules/@babel/runtime/helpers/wrapNativeSuper.js":[function(require,module,exports) {
+var getPrototypeOf = require("./getPrototypeOf");
+
+var setPrototypeOf = require("./setPrototypeOf");
+
+var isNativeFunction = require("./isNativeFunction");
+
+var construct = require("./construct");
+
+function _wrapNativeSuper(Class) {
+  var _cache = typeof Map === "function" ? new Map() : undefined;
+
+  module.exports = _wrapNativeSuper = function _wrapNativeSuper(Class) {
+    if (Class === null || !isNativeFunction(Class)) return Class;
+
+    if (typeof Class !== "function") {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    if (typeof _cache !== "undefined") {
+      if (_cache.has(Class)) return _cache.get(Class);
+
+      _cache.set(Class, Wrapper);
+    }
+
+    function Wrapper() {
+      return construct(Class, arguments, getPrototypeOf(this).constructor);
+    }
+
+    Wrapper.prototype = Object.create(Class.prototype, {
+      constructor: {
+        value: Wrapper,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    return setPrototypeOf(Wrapper, Class);
+  };
+
+  return _wrapNativeSuper(Class);
+}
+
+module.exports = _wrapNativeSuper;
+},{"./getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","./setPrototypeOf":"node_modules/@babel/runtime/helpers/setPrototypeOf.js","./isNativeFunction":"node_modules/@babel/runtime/helpers/isNativeFunction.js","./construct":"node_modules/@babel/runtime/helpers/construct.js"}],"node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -900,13 +1154,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //main.js
 window.addEventListener("DOMContentLoaded", initSingleRecipeScraper);
+window.addEventListener("DOMContentLoaded", initCSVRecipeScraper);
 
 function initSingleRecipeScraper() {
   if (!document.querySelector(".recipe-scraper-admin-page")) return;
   var form = document.querySelector('.recipe-scraper-admin-page [data-tab="single-import"] form');
+  if (!form) return;
   var button = form.querySelector("button");
   var idleButtonText = button.innerText;
-  if (!form) return;
   form.addEventListener("submit", sendUrlToScrape);
 
   function sendUrlToScrape(_x) {
@@ -915,7 +1170,7 @@ function initSingleRecipeScraper() {
 
   function _sendUrlToScrape() {
     _sendUrlToScrape = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(e) {
-      var errorBlock, form, recipe, recipeVal, youtube, youtubeVal, data, body, res, links, newLink, _errorBlock, errorString;
+      var errorBlock, form, recipe, recipeVal, youtube, youtubeVal, data, body, res, _errorBlock, errorString;
 
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
@@ -931,7 +1186,7 @@ function initSingleRecipeScraper() {
               youtube = form.querySelector("#youtube");
               youtubeVal = youtube.value;
               data = {
-                action: "GFOAS_scrape",
+                action: "GFOAS_scrape_single",
                 recipe: recipeVal,
                 youtube: youtubeVal
               };
@@ -962,15 +1217,7 @@ function initSingleRecipeScraper() {
               youtube.value = "";
 
               if (res.message === "success") {
-                links = document.querySelector(".links");
-
-                if (links.querySelector(".temp")) {
-                  links.removeChild(links.querySelector(".temp"));
-                }
-
-                newLink = document.createElement("div");
-                newLink.innerHTML = " <a href=\"".concat(res.link, "\" style=\"padding:10px 0; display:inline-block;\">").concat(res.link, "</a>");
-                links.appendChild(newLink);
+                appendLink(res.link);
               } else {
                 _errorBlock = document.querySelector(".errors");
                 errorString = "<pre>".concat(JSON.stringify(res.message, null, 2), "</pre>");
@@ -985,6 +1232,68 @@ function initSingleRecipeScraper() {
       }, _callee);
     }));
     return _sendUrlToScrape.apply(this, arguments);
+  }
+}
+
+function initCSVRecipeScraper() {
+  if (!document.querySelector(".recipe-scraper-admin-page")) return;
+  var form = document.querySelector('.recipe-scraper-admin-page [data-tab="csv-import"] form');
+  if (!form) return;
+  var button = form.querySelector("button");
+  var idleButtonText = button.innerText;
+  form.addEventListener("submit", sendCSVImport);
+
+  function sendCSVImport(_x2) {
+    return _sendCSVImport.apply(this, arguments);
+  }
+
+  function _sendCSVImport() {
+    _sendCSVImport = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(e) {
+      var form, csv, formData, res, errorBlock, errorString;
+      return _regenerator.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              e.preventDefault();
+              form = e.target;
+              button.innerText = "Loading...";
+              csv = form.querySelector("[name='csvfile']").files[0];
+              formData = new FormData();
+              formData.append("csv", csv);
+              formData.append("action", "GFOAS_scrape_csv");
+              _context2.next = 9;
+              return fetch(WP.ajax, {
+                method: "POST",
+                credentials: "same-origin",
+                body: formData
+              }).then(function (res) {
+                return res.json();
+              });
+
+            case 9:
+              res = _context2.sent;
+              temporaryMessage(button, "success", idleButtonText);
+
+              if (res.errors.length > 0) {
+                errorBlock = document.querySelector(".errors");
+                errorString = "<pre>".concat(JSON.stringify(res.message, null, 2), "</pre>");
+                temporaryMessage(errorBlock, errorString, "", 1000000);
+              }
+
+              if (res.links.length > 0) {
+                links.forEach(function (link) {
+                  appendLink(link);
+                });
+              }
+
+            case 13:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _sendCSVImport.apply(this, arguments);
   }
 }
 
@@ -1012,6 +1321,18 @@ var toQueryString = function toQueryString(data) {
   var queryString = urlSearhParams.toString();
   return queryString;
 };
+
+function appendLink(link) {
+  var links = document.querySelector(".links");
+
+  if (links.querySelector(".temp")) {
+    links.removeChild(links.querySelector(".temp"));
+  }
+
+  var newLink = document.createElement("div");
+  newLink.innerHTML = " <a href=\"".concat(link, "\" style=\"padding:10px 0; display:inline-block;\">").concat(link, "</a>");
+  links.appendChild(newLink);
+}
 },{"@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js"}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
@@ -1087,10 +1408,125 @@ module.hot.accept(reloadCSS);
 },{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _wrapNativeSuper2 = _interopRequireDefault(require("@babel/runtime/helpers/wrapNativeSuper"));
+
 require("./scripts/main.js");
 
 require("./styles/main.scss");
-},{"./scripts/main.js":"scripts/main.js","./styles/main.scss":"styles/main.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var tabsTemplate = "\n<style>\n.tabs-wrapper{\n  background:#efefef;\n}\n  ::slotted([aria-hidden=\"true\"]){\n    display:none;\n  }\n  [aria-selected=\"true\"]{\n    background:black;\n    color:white;\n  }\n</style>\n<div class=\"tabs-wrapper\">\n  <div class=\"tabs\">\n    \n  </div>\n  <div class=\"content\">\n    <slot name=\"section\"></slot>\n  </div>\n</div>\n";
+
+var Tabs = /*#__PURE__*/function (_HTMLElement) {
+  (0, _inherits2.default)(Tabs, _HTMLElement);
+
+  var _super = _createSuper(Tabs);
+
+  function Tabs() {
+    var _this;
+
+    (0, _classCallCheck2.default)(this, Tabs);
+    _this = _super.call(this);
+    _this.shadow = _this.attachShadow({
+      mode: "open"
+    });
+    _this.shadowRoot.innerHTML = tabsTemplate;
+    _this.tabSlot = _this.shadow.querySelector(".tabs");
+    _this.sections = (0, _toConsumableArray2.default)(_this.querySelectorAll("tab-\uD83D\uDE80"));
+
+    _this.sections.forEach(function (section, index) {
+      section.slot = "section";
+
+      var tabButton = _this.createTabButton(section, index);
+
+      _this.tabSlot.appendChild(tabButton);
+    });
+
+    _this.tabs = (0, _toConsumableArray2.default)(_this.tabSlot.querySelectorAll("button"));
+    return _this;
+  }
+
+  (0, _createClass2.default)(Tabs, [{
+    key: "connectedCallback",
+    value: function connectedCallback() {
+      this.selected = 0;
+      this._handleTabClick = this.handleTabClick.bind(this);
+      this.tabSlot.addEventListener("click", this._handleTabClick);
+    }
+  }, {
+    key: "disconnectedCallback",
+    value: function disconnectedCallback() {
+      this.tabSlot.removeEventListener("click", this._handleTabClick);
+    }
+  }, {
+    key: "createTabButton",
+    value: function createTabButton(section, id) {
+      var button = document.createElement("button");
+      button.setAttribute("data-panel", id);
+      button.innerText = section.title || "panel ".concat(id + 1);
+      return button;
+    }
+  }, {
+    key: "handleTabClick",
+    value: function handleTabClick(e) {
+      if (e.target.dataset.panel) {
+        // console.log(this.tabs.findIndex);
+        this.selected = this.tabs.findIndex(function (tab) {
+          return tab === e.target;
+        });
+        e.target.focus();
+      }
+    }
+  }, {
+    key: "selectTab",
+    value: function selectTab(idx) {
+      for (var i = 0, tab; tab = this.tabs[i]; ++i) {
+        var select = i === idx;
+        tab.setAttribute("tabindex", select ? 0 : -1);
+        tab.setAttribute("aria-selected", select);
+        this.sections[i].setAttribute("aria-hidden", !select);
+      }
+    }
+  }, {
+    key: "selected",
+    set: function set(idx) {
+      this.selectTab(idx);
+    }
+  }]);
+  return Tabs;
+}( /*#__PURE__*/(0, _wrapNativeSuper2.default)(HTMLElement));
+
+window.customElements.define("tabs-🚀", Tabs);
+window.customElements.define("tab-🚀", /*#__PURE__*/function (_HTMLElement2) {
+  (0, _inherits2.default)(_class, _HTMLElement2);
+
+  var _super2 = _createSuper(_class);
+
+  function _class() {
+    (0, _classCallCheck2.default)(this, _class);
+    return _super2.apply(this, arguments);
+  }
+
+  return _class;
+}( /*#__PURE__*/(0, _wrapNativeSuper2.default)(HTMLElement)));
+},{"@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/wrapNativeSuper":"node_modules/@babel/runtime/helpers/wrapNativeSuper.js","./scripts/main.js":"scripts/main.js","./styles/main.scss":"styles/main.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1118,7 +1554,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58209" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61860" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

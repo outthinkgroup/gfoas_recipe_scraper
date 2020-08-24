@@ -13,7 +13,7 @@ body {
   h2 {
     margin-top: 5px;
   }
-  section {
+  .tab-wrapper {
     background: white;
     padding: 20px;
   }
@@ -28,14 +28,3 @@ body {
 }
 
 //layout
-.layout {
-  display: flex;
-  .sidebar {
-    margin-right: 40px;
-  }
-}
-
-//TABS
-section:not([data-active]) {
-  display: none;
-}
