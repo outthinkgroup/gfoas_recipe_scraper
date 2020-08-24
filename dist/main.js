@@ -1170,7 +1170,7 @@ function initSingleRecipeScraper() {
 
   function _sendUrlToScrape() {
     _sendUrlToScrape = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(e) {
-      var errorBlock, form, recipe, recipeVal, youtube, youtubeVal, data, body, res, links, newLink, _errorBlock, errorString;
+      var errorBlock, form, recipe, recipeVal, youtube, youtubeVal, data, body, res, _errorBlock, errorString;
 
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
@@ -1217,15 +1217,7 @@ function initSingleRecipeScraper() {
               youtube.value = "";
 
               if (res.message === "success") {
-                links = document.querySelector(".links");
-
-                if (links.querySelector(".temp")) {
-                  links.removeChild(links.querySelector(".temp"));
-                }
-
-                newLink = document.createElement("div");
-                newLink.innerHTML = " <a href=\"".concat(res.link, "\" style=\"padding:10px 0; display:inline-block;\">").concat(res.link, "</a>");
-                links.appendChild(newLink);
+                appendLink(res.link);
               } else {
                 _errorBlock = document.querySelector(".errors");
                 errorString = "<pre>".concat(JSON.stringify(res.message, null, 2), "</pre>");
@@ -1257,7 +1249,7 @@ function initCSVRecipeScraper() {
 
   function _sendCSVImport() {
     _sendCSVImport = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(e) {
-      var form, csv, formData, res;
+      var form, csv, formData, res, errorBlock, errorString;
       return _regenerator.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -1268,11 +1260,8 @@ function initCSVRecipeScraper() {
               csv = form.querySelector("[name='csvfile']").files[0];
               formData = new FormData();
               formData.append("csv", csv);
-              formData.append("action", "GFOAS_scrape_csv"); // const body = toQueryString(data);
-              // console.log(body);
-
-              console.log(formData);
-              _context2.next = 10;
+              formData.append("action", "GFOAS_scrape_csv");
+              _context2.next = 9;
               return fetch(WP.ajax, {
                 method: "POST",
                 credentials: "same-origin",
@@ -1281,10 +1270,21 @@ function initCSVRecipeScraper() {
                 return res.json();
               });
 
-            case 10:
+            case 9:
               res = _context2.sent;
-              console.log(res);
               temporaryMessage(button, "success", idleButtonText);
+
+              if (res.errors.length > 0) {
+                errorBlock = document.querySelector(".errors");
+                errorString = "<pre>".concat(JSON.stringify(res.message, null, 2), "</pre>");
+                temporaryMessage(errorBlock, errorString, "", 1000000);
+              }
+
+              if (res.links.length > 0) {
+                links.forEach(function (link) {
+                  appendLink(link);
+                });
+              }
 
             case 13:
             case "end":
@@ -1321,6 +1321,18 @@ var toQueryString = function toQueryString(data) {
   var queryString = urlSearhParams.toString();
   return queryString;
 };
+
+function appendLink(link) {
+  var links = document.querySelector(".links");
+
+  if (links.querySelector(".temp")) {
+    links.removeChild(links.querySelector(".temp"));
+  }
+
+  var newLink = document.createElement("div");
+  newLink.innerHTML = " <a href=\"".concat(link, "\" style=\"padding:10px 0; display:inline-block;\">").concat(link, "</a>");
+  links.appendChild(newLink);
+}
 },{"@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js"}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 

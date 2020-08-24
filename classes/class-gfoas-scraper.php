@@ -40,11 +40,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       $imported_recipe_ids = $this->pull_and_save_all_recipes($rows);
       $recipe_links = $this->createEditLinks($imported_recipe_ids);
 
-      if(count($this->error_obj) !== 0){
-        echo json_encode(['message'=>$this->error_obj]);
-      }else{
-        echo json_encode(['message'=>'success', 'links' => $recipe_links]);
-      }
+      echo json_encode(['message'=>'success', 'links' => $recipe_links, 'errors'=> $this->error_obj]);
       
       die();
     }
@@ -57,8 +53,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
         $recipe_id;
         $youtube_url;
         foreach($row as $column){
-          $column = str_replace('\\', '', $column);
-          // var_dump([strpos($column,'glutenfreeonashoestring.com'), $this->is_gfoas_url($column)]);
+          $column = str_replace('\\', '', $column);// get rid of escaped characters
           
           if($this->is_gfoas_url($column)){
             //if true run recipe import 
@@ -69,7 +64,9 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
           } else{
              $this->error_obj[] = 'error: The Url '.$column.' is not a valid glutenfreeonashoestring.com url, or a valid youtube url';
           }
+
         }
+
         if($youtube_url && $recipe_id){
           update_field('youtube_url', $youtube_url, $recipe_id);
         }
@@ -91,7 +88,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       if(strpos($column, 'glutenfreeonashoestring.com') > -1 ){
         return true;
       }else{
-        var_dump([strpos($column, 'glutenfreeonashoestring.com') > -1, $column]);
+        
         return false;
       }
     }
@@ -108,14 +105,15 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       $slug = $this->get_slug($url);
 
       if($this->recipe_exists($slug)){
+
+        $this->error_obj[] = $slug;
         $this->error_obj[] = 'error: Recipe already exists';
+      } else {
+        $recipe = $this->fetch_recipe($slug);
+        $post_id = $this->insert_recipe($recipe);
       }
-
-      $recipe = $this->fetch_recipe($slug);
-      
-      $post_id = $this->insert_recipe($recipe);
-
       return $post_id;
+
     }
 
 
@@ -200,17 +198,14 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       }
     }
 
-    private function recipe_exists($slug){
-      $existing_posts = get_posts([
-        'post_type'=>'recipe',
-        'post_name' =>  $slug
-      ]);
-      if(is_array($existing_posts) && count($existing_posts) > 0){
+    private function recipe_exists($post_name) {
+    global $wpdb;
+    if($wpdb->get_row("SELECT post_name FROM wp_posts WHERE post_name = '" . $post_name . "'", 'ARRAY_A')) {
         return true;
-      }else{
+    } else {
         return false;
-      }
     }
+}
 
   }//end of class
 

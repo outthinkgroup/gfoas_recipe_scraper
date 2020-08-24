@@ -51,13 +51,7 @@ function initSingleRecipeScraper() {
     recipe.value = "";
     youtube.value = "";
     if (res.message === "success") {
-      const links = document.querySelector(".links");
-      if (links.querySelector(".temp")) {
-        links.removeChild(links.querySelector(".temp"));
-      }
-      const newLink = document.createElement("div");
-      newLink.innerHTML = ` <a href="${res.link}" style="padding:10px 0; display:inline-block;">${res.link}</a>`;
-      links.appendChild(newLink);
+      appendLink(res.link);
     } else {
       const errorBlock = document.querySelector(".errors");
 
@@ -88,17 +82,24 @@ function initCSVRecipeScraper() {
     const formData = new FormData();
     formData.append("csv", csv);
     formData.append("action", "GFOAS_scrape_csv");
-    // const body = toQueryString(data);
-    // console.log(body);
-    console.log(formData);
+
     const res = await fetch(WP.ajax, {
       method: "POST",
       credentials: "same-origin",
       body: formData,
     }).then((res) => res.json());
 
-    console.log(res);
     temporaryMessage(button, "success", idleButtonText);
+    if (res.errors.length > 0) {
+      const errorBlock = document.querySelector(".errors");
+      const errorString = `<pre>${JSON.stringify(res.message, null, 2)}</pre>`;
+      temporaryMessage(errorBlock, errorString, "", 1000000);
+    }
+    if (res.links.length > 0) {
+      links.forEach((link) => {
+        appendLink(link);
+      });
+    }
   }
 }
 
@@ -122,3 +123,13 @@ const toQueryString = (data) => {
   const queryString = urlSearhParams.toString();
   return queryString;
 };
+
+function appendLink(link) {
+  const links = document.querySelector(".links");
+  if (links.querySelector(".temp")) {
+    links.removeChild(links.querySelector(".temp"));
+  }
+  const newLink = document.createElement("div");
+  newLink.innerHTML = ` <a href="${link}" style="padding:10px 0; display:inline-block;">${link}</a>`;
+  links.appendChild(newLink);
+}

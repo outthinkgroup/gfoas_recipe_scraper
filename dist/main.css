@@ -24,11 +24,4 @@ body *:before {
   margin-bottom: 30px;
 }
 
-.layout {
-  display: flex;
-}
-.layout .sidebar {
-  margin-right: 40px;
-}
-
 /*# sourceMappingURL=/main.css.map */

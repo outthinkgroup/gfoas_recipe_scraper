@@ -2,7 +2,7 @@
 <div class="recipe-scraper-admin-page">
   <h1>Pull Recipes</h1>
 
-  <div class="layout" data-state="single-import">
+  <div class="layout">
     
 
     
@@ -37,12 +37,7 @@
             <button class="button-primary" type="submit">Pull Recipe</button>
             
           </form>
-          <div class="links">
-            <h3>Edit Recipes</h3>
-            <p class="temp">no recipes imported yet</p>
-          </div>
-          <div class="errors">
-            </div>
+         
           </div>
 
       </tab-🚀>
@@ -69,8 +64,14 @@
         </div>
       </tab-🚀>
 
-    <tabs-🚀>
+    </tabs-🚀>
 
+    <div class="links">
+      <h3>Edit Recipes</h3>
+      <p class="temp">no recipes imported yet</p>
+    </div>
+    <div class="errors">
+    </div>
 
 
   </div>
