@@ -13,7 +13,7 @@ body *:before {
 .recipe-scraper-admin-page h2 {
   margin-top: 5px;
 }
-.recipe-scraper-admin-page section {
+.recipe-scraper-admin-page .tab-wrapper {
   background: white;
   padding: 20px;
 }
@@ -29,10 +29,6 @@ body *:before {
 }
 .layout .sidebar {
   margin-right: 40px;
-}
-
-section:not([data-active]) {
-  display: none;
 }
 
 /*# sourceMappingURL=/main.css.map */

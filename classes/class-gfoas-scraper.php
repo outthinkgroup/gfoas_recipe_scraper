@@ -4,11 +4,19 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
   class GFOAS_SCRAPE {
     public $error_obj;
     function __construct() {
-      add_action("wp_ajax_GFOAS_scrape", array($this, 'logged_in_request'));
-      add_action("wp_ajax_nopriv_GFOAS_scrape", array($this, "not_logged_in_request"));
+      add_action("wp_ajax_GFOAS_scrape_single", array($this, 'logged_in_request_single'));
+      add_action("wp_ajax_nopriv_GFOAS_scrape_single", array($this, "not_logged_in_request"));
+
+      add_action("wp_ajax_GFOAS_scrape_csv", array($this, 'logged_in_request_csv'));
+      add_action("wp_ajax_nopriv_GFOAS_scrape_csv", array($this, "not_logged_in_request"));
     }
 
-    function logged_in_request(){
+    function not_logged_in_request(){
+      echo 'PLEASE LOGIN';
+      die();
+    }
+
+    function logged_in_request_single(){
        
       $recipe_url = $_POST['recipe'];
       $youtube_url = $_POST['youtube'];
@@ -26,12 +34,75 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       die();
     }
     
-    function not_logged_in_request(){
-      echo 'PLEASE LOGIN';
+    function logged_in_request_csv(){
+      
+      $rows = array_map( 'str_getcsv', file( $_FILES['csv']['tmp_name'] ) );
+      $imported_recipe_ids = $this->pull_and_save_all_recipes($rows);
+      $recipe_links = $this->createEditLinks($imported_recipe_ids);
+
+      if(count($this->error_obj) !== 0){
+        echo json_encode(['message'=>$this->error_obj]);
+      }else{
+        echo json_encode(['message'=>'success', 'links' => $recipe_links]);
+      }
+      
       die();
     }
 
+    private function pull_and_save_all_recipes($rows){
+      $recipe_ids = [];
+      // loop thru rows
+      foreach($rows as $row){
+        // loop thru columns
+        $recipe_id;
+        $youtube_url;
+        foreach($row as $column){
+          $column = str_replace('\\', '', $column);
+          // var_dump([strpos($column,'glutenfreeonashoestring.com'), $this->is_gfoas_url($column)]);
+          
+          if($this->is_gfoas_url($column)){
+            //if true run recipe import 
+            $recipe_id = $this->pull_and_save_recipe($column);
+          }else if($this->is_youtube_url($column)){  
+            //if true run youtube update field fn
+            $youtube_url = $column;
+          } else{
+             $this->error_obj[] = 'error: The Url '.$column.' is not a valid glutenfreeonashoestring.com url, or a valid youtube url';
+          }
+        }
+        if($youtube_url && $recipe_id){
+          update_field('youtube_url', $youtube_url, $recipe_id);
+        }
 
+        $recipe_ids[] = $recipe_id;
+      }
+      return $recipe_ids;
+    }
+
+    private function createEditLinks($imported_recipe_ids){
+      $links = [];
+      foreach($imported_recipe_ids as $recipe_id){
+        $links[] = get_edit_post_link($recipe_id);
+      }
+      return $links;
+    }
+
+    public function is_gfoas_url($column){
+      if(strpos($column, 'glutenfreeonashoestring.com') > -1 ){
+        return true;
+      }else{
+        var_dump([strpos($column, 'glutenfreeonashoestring.com') > -1, $column]);
+        return false;
+      }
+    }
+    public function is_youtube_url($column){
+      if((strpos($column, 'youtube.com') > -1 ) || (strpos($column, 'youtu.be') > -1 ) ){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    
     private function pull_and_save_recipe($url){
 
       $slug = $this->get_slug($url);
@@ -46,6 +117,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
 
       return $post_id;
     }
+
 
     private function get_slug($url){
       $exploded_str = explode('/',$url);
