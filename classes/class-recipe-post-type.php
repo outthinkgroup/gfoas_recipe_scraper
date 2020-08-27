@@ -18,7 +18,7 @@ class Recipe_Post_Type {
       'query_var'          => true,
       'rewrite'            => array( 'slug' => 'recipe' ),
       'capability_type'    => 'post',
-      'rewrite' => array( 'slug' => 'projects' ),
+      'rewrite' => array( 'slug' => 'recipes' ),
       'has_archive' => true,
       'hierarchical'       => false,
       'menu_position'      => null,
