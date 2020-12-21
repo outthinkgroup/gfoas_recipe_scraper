@@ -154,7 +154,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
         $this->set_featured_image( $data->image , $post_id);
         update_field('yield', $data->yield , $post_id);
         update_field('ingredients', $data->ingredients, $post_id);
-        update_field('ingredients', $data->recipe_notes, $post_id);
+        update_field('recipe_notes', $data->recipe_notes, $post_id);
         $this->update_repeater_field(['steps', 'step'], $data->steps, $post_id);
         
         return $post_id;
@@ -191,7 +191,6 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
     }
 
     private function set_featured_image($image_id, $post_id){
-      var_dump($image_id);
       $attachment_id = set_post_thumbnail($post_id, $image_id);
       $success = gettype($attachment_id) === 'integer';
       if(!$success){
