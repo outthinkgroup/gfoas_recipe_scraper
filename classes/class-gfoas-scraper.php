@@ -154,6 +154,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
         $this->set_featured_image( $data->image , $post_id);
         update_field('yield', $data->yield , $post_id);
         update_field('ingredients', $data->ingredients, $post_id);
+        update_field('recipe_notes', $data->recipe_notes, $post_id);
         $this->update_repeater_field(['steps', 'step'], $data->steps, $post_id);
         
         return $post_id;
@@ -190,11 +191,11 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
     }
 
     private function set_featured_image($image_id, $post_id){
-      // var_dump(wp_get_attachment_image( $image_id, 'thumbnail' ));
       $attachment_id = set_post_thumbnail($post_id, $image_id);
       $success = gettype($attachment_id) === 'integer';
       if(!$success){
         $this->error_obj[] = 'error: couldn\'t set the image as the featured image'; 
+        $this->error_obj[] = $attachment_id; 
       }
     }
 
@@ -222,6 +223,7 @@ class Recipe {
   public $ingredients;
   public $steps;
   public $categories;
+  public $recipe_notes;
 
   public $error_obj =[]; 
 
@@ -243,6 +245,7 @@ class Recipe {
     $this->yield = $acf->yield;
     $this->ingredients = $acf->ingredient_text;
     $this->steps = $this->clean_up_steps($acf->step);
+    $this->recipe_notes = $acf->recipe_notes;
     $this->categories = $this->set_categories($body->categories);
   }
 

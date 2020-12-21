@@ -47,7 +47,7 @@ class Save_Media {
 
       if ( !empty( $results['error'] ) ) {
           
-        return 'error';
+        return $results['error'];
 
       } else {
 
