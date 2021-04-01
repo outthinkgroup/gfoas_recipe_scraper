@@ -166,7 +166,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
     }
 
 
-    private function fetch_data($url){
+    function fetch_data($url){
       $json = wp_remote_get($url);
       $json_body = $json['body'];
       $raw_data = json_decode($json_body);
@@ -225,6 +225,9 @@ class Recipe {
   public $categories;
   public $recipe_notes;
 
+  //used to get the featured image if none is set;
+  private $post_content;
+
   public $error_obj =[]; 
 
   function __construct($body){
@@ -239,14 +242,32 @@ class Recipe {
     $this->categories = $categories;
     $this->prep_time = $acf->prep_time;
     $this->cook_time = $acf->cook_time;
-    // $this->image = $acf->image_upload;
-    $image_id = new Save_Media($acf->image_upload, $this->slug);
-    $this->image = $image_id->get_image_id();
+    $this->image = $this->get_featured_image($body);
     $this->yield = $acf->yield;
     $this->ingredients = $acf->ingredient_text;
     $this->steps = $this->clean_up_steps($acf->step);
     $this->recipe_notes = $acf->recipe_notes;
     $this->categories = $this->set_categories($body->categories);
+  }
+
+  private function get_featured_image($body){
+    $image_upload = $body->acf->image_upload; //url
+    $wp_thumbnail_id = $body->featured_media; //media id
+    $post_content = $body->content->rendered; //html
+
+    if($image_upload !== false){
+      $remote_image = $image_upload;
+    }
+    elseif($wp_thumbnail_id !== 0){
+      $remote_image = $this->fetch_media_url($wp_thumbnail_id);
+    }
+    else {
+      $remote_image = $this->parse_content_for_image($post_content);
+    }
+    
+    $image_id = new Save_Media($remote_image, $this->slug);
+    return $image_id->get_image_id();
+    
   }
 
   private function set_categories($category_ids){
@@ -305,6 +326,33 @@ class Recipe {
 
     }
     return $cleaned_steps;
+  }
+
+  private function fetch_media_url($id){
+    $body = $this->fetch_data("https://glutenfreeonashoestring.com/wp-json/wp/v2/media/$id");
+    return $body->source_url;
+  }
+
+  private function parse_content_for_image($post_content){
+    require_once RECIPE_SCRAPER_PATH . '/includes/simple_html_dom.php';
+    $url = str_get_html($post_content)->find('img', 0)->src;
+    if($url){
+      return $url;
+    }
+    $this->error_obj[]='error: couldn\'t find an image in content';
+    return false;
+  }
+
+
+  public function fetch_data($url){
+    $json = wp_remote_get($url);
+    $json_body = $json['body'];
+    $raw_data = json_decode($json_body);
+    if($raw_data){
+      return $raw_data[0];
+    } else {
+      $this->error_obj[] = 'error: couldnt fetch post';
+    }
   }
 
 }
