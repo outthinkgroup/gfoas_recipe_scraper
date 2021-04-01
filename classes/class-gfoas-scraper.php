@@ -191,6 +191,10 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
     }
 
     private function set_featured_image($image_id, $post_id){
+      if(gettype($image_id)=="string"){
+        $this->error_obj[] = "an error occured in Save_Media::save_to_media_library()";
+        $this->error_obj[] = $image_id;
+      }
       $attachment_id = set_post_thumbnail($post_id, $image_id);
       $success = gettype($attachment_id) === 'integer';
       if(!$success){

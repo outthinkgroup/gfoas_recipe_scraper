@@ -10,7 +10,6 @@ class Save_Media {
 
     $this->image_id = $this->save_to_media_library();
 
-    
   }
   public function get_image_id(){
     return $this->image_id;
@@ -28,6 +27,7 @@ class Save_Media {
     // Download file to temp dir
     $temp_file = download_url( $url, $timeout_seconds );
     $wp_filetype = wp_check_filetype(basename($url), null );
+    
     if ( !is_wp_error( $temp_file ) ) {
       // Array based on $_FILE as seen in PHP file uploads
       $file = array(
@@ -40,11 +40,12 @@ class Save_Media {
 
       $overrides = array(
           'test_form' => false,
+          'test_type' => false,
       );
-
+      
       // Move the temporary file into the uploads directory
       $results = wp_handle_sideload( $file, $overrides );
-
+      
       if ( !empty( $results['error'] ) ) {
           
         return $results['error'];
@@ -54,6 +55,8 @@ class Save_Media {
         $filename  = $results['file']; // Full path to the file
         $local_url = $results['url'];  // URL to the file in the uploads dir
         $type      = $results['type']; // MIME type of the file
+        
+
 
         $attachment = array(
           'guid'    => $local_url,
@@ -62,7 +65,7 @@ class Save_Media {
           'post_content' => '',
           'post_status' => 'inherit'
         );
-
+        
         $attach_id = wp_insert_attachment( $attachment, $local_url );
 
         $attach_data = wp_generate_attachment_metadata( $attach_id, $local_url );
