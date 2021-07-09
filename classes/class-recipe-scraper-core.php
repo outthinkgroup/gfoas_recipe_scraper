@@ -1,6 +1,5 @@
 <?php
 define('CLASS_DIR', RECIPE_SCRAPER_PATH . '/classes' );
-define('GFOAS_RS_IS_TESTING', true );
 
 if(!class_exists( 'Recipe_Scraper_Core' )){
   class Recipe_Scraper_Core {
@@ -19,9 +18,8 @@ if(!class_exists( 'Recipe_Scraper_Core' )){
       $this->add_scraper_ui_page();
       
       //TEST
-      // if(GFOAS_RS_IS_TESTING && GFOAS_RS_IS_TESTING === true){
-        include_once RECIPE_SCRAPER_PATH . '/__TEST__/index.php';
-      // }
+      //include_once RECIPE_SCRAPER_PATH . '/__TEST__/index.php';
+      
 
     }
 
