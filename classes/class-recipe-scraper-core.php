@@ -1,5 +1,6 @@
 <?php
 define('CLASS_DIR', RECIPE_SCRAPER_PATH . '/classes' );
+define('GFOAS_RS_IS_TESTING', true );
 
 if(!class_exists( 'Recipe_Scraper_Core' )){
   class Recipe_Scraper_Core {
@@ -11,10 +12,17 @@ if(!class_exists( 'Recipe_Scraper_Core' )){
       include_once CLASS_DIR . '/class-gfoas-scraper.php';
       include_once CLASS_DIR . '/class-save-media.php';
       include_once CLASS_DIR . '/class-recipe-scraper-ui.php';
-
+      
+      
       //functions
       $this->add_recipe_post_type();
       $this->add_scraper_ui_page();
+      
+      //TEST
+      // if(GFOAS_RS_IS_TESTING && GFOAS_RS_IS_TESTING === true){
+        include_once RECIPE_SCRAPER_PATH . '/__TEST__/index.php';
+      // }
+
     }
 
     function add_recipe_post_type(){

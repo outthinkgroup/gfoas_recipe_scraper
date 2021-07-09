@@ -74,6 +74,8 @@ class Save_Media {
         
         return $attach_id;
       }
+    } else {
+      return "ERROR";
     }
   }
 }
