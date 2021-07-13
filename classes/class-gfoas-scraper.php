@@ -30,9 +30,8 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
         do_action('qm/debug', $this->error_obj);
         echo json_encode(['message'=> $this->error_obj]);
       }else{
-        // update_field('youtube_url', $youtube_url, $recipe_post_id);
-        // echo json_encode(['message'=>'success', 'link'=> get_edit_post_link($recipe_post_id)]);
-        echo json_encode(['message'=>$recipe_post_id]);
+        update_field('youtube_url', $youtube_url, $recipe_post_id);
+        echo json_encode(['message'=>'success', 'link'=> get_edit_post_link($recipe_post_id)]);
       }
 
       die();
@@ -131,7 +130,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       $wprm_url ='http://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_recipe/?slug=wprm-'.$slug;
       $url = 'https://glutenfreeonashoestring.com/wp-json/wp/v2/posts/?slug='.$slug;
 
-      $wprm_recipe_raw_body = $his->fetch_data($wprm_url); // leave off the index [0] so we can check if it is set.
+      $wprm_recipe_raw_body = $this->fetch_data($wprm_url); // leave off the index [0] so we can check if it is set.
       $wp_post_raw_body = $this->fetch_data($url)[0];
       
       /*

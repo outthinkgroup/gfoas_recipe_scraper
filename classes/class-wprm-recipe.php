@@ -35,7 +35,7 @@ class WPRM_Recipe {
     $this->image = $this->get_featured_image($wprm->image_url);
     $this->yield = "Serves: " . $wprm->servings . "</br> Serving Size:" . $wprm->serving_size;
     $this->ingredients = $this->format_ingredients($wprm->ingredients_flat);
-    $this->steps = $this->format_steps($wprm->instructions);
+    $this->steps = $this->format_steps($wprm->instructions_flat);
     $this->recipe_notes = $wprm->notes;
   }
 
@@ -116,40 +116,46 @@ class WPRM_Recipe {
   private function format_ingredients($ingredients, $depth=0) {
     $ingredients_html = count($ingredients) <= 1 ? "" : "<ul>";
 
-    foreach($ingredients as $ingredient){
+    foreach($ingredients as $index=>$ingredient){
       $formatted_ingredient = "";
+      $ingredient_type = "ingredient";
+      // if Ingredient is type group it is a heading
+      if(isset($ingredient->type) && $ingredient->type == "group") {
+        $ingredient_type = "group";
+        $formatted_ingredient = "<h4>" . $ingredient->name . "</h4> ";
+      } else {
+        $formatted_ingredient .= "<li>";
+        // else its an ingredient
+        if(isset($ingredient->name) && $ingredient->name!=="" ){
+          $ingredient_name = "";
+          
+          if(isset($ingredient->amount) && $ingredient->amount!=="" ){
+            $ingredient_name .= $ingredient->amount; 
+            $ingredient_name .= " " . $ingredient->unit; 
+          }
 
-      //Build the Ingredient with amount and unit and name
-      if(isset($ingredient->name) && $ingredient->name!=="" ){
-        $ingredient_name = "";
-        $heading_depth = $depth + 4;//start at h4 then as we go deeper increase heading_depth
-        
-        if(isset($ingredient->amount) && $ingredient->amount!=="" ){
-          $ingredient_name .= $ingredient->amount; 
-          $ingredient_name .= " " . $ingredient->unit; 
+          $ingredient_name .= " $ingredient->name";
         }
-
-        $ingredient_name .= " $ingredient->name";
-        $formatted_ingredient .= "<h$heading_depth>$ingredient_name</h$heading_depth>";
+        
+        // Notes
+        if( isset( $ingredient->notes ) && $ingredients->notes !== "" ){
+          $formatted_ingredient .= "<small>$ingredients->notes</small>";
+        }
+        $formatted_ingredient .= $ingredient_name."</li>";
       }
 
-      // Notes
-      if( isset( $ingredient->notes ) && $ingredients->notes !== "" ){
-        $formatted_ingredient .= "<small>$ingredients->notes</small>";
+      $ingredients_html .= $formatted_ingredient;
+      
+      // check to see whats next to close html tags if needed
+      $next_ingredient = $ingredients[$index+1];
+      if( ( isset($next_ingredient->type) && $next_ingredient->type == "group" ) || $next_ingredient == null) {
+        $ingredients_html .= "</ul>";
+      } 
+      if($ingredient_type === "group") {
+        $ingredients_html .= "<ul>";
       }
-
-      // Sub ingredients
-      if(isset($ingredient->ingredients) && !empty($ingredient->ingredients) && is_array($ingredient->ingredients) && count($ingredient->ingredients) > 0 ) {
-        $ingredient_list = $this->format_ingredients($ingredient->ingredients, $depth+1);
-        $formatted_ingredient .= $ingredient_list;
-      }
-
-      $html_tag = count($ingredients) <= 1 ? "div" : "li";
-
-      $ingredients_html .= "<$html_tag>" . $formatted_ingredient . "</$html_tag>";
     }
 
-    $ingredients_html .= count($ingredients) <= 1 ? "" : "</ul>";
     return $ingredients_html;
   }
 
