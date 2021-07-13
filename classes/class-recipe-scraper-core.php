@@ -11,10 +11,16 @@ if(!class_exists( 'Recipe_Scraper_Core' )){
       include_once CLASS_DIR . '/class-gfoas-scraper.php';
       include_once CLASS_DIR . '/class-save-media.php';
       include_once CLASS_DIR . '/class-recipe-scraper-ui.php';
-
+      
+      
       //functions
       $this->add_recipe_post_type();
       $this->add_scraper_ui_page();
+      
+      //TEST
+      //include_once RECIPE_SCRAPER_PATH . '/__TEST__/index.php';
+      
+
     }
 
     function add_recipe_post_type(){

@@ -1,4 +1,7 @@
 <?php
+//WPRM_RECIPE CLASS
+include_once RECIPE_SCRAPER_PATH .'classes/class-wprm-recipe.php';
+
 if(!class_exists( 'GFOAS_SCRAPE' )){
 
   class GFOAS_SCRAPE {
@@ -24,7 +27,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       $recipe_post_id = $this->pull_and_save_recipe($recipe_url);
       
       if(count($this->error_obj)!==0){
-        // var_dump($this->error_obj);
+        do_action('qm/debug', $this->error_obj);
         echo json_encode(['message'=> $this->error_obj]);
       }else{
         update_field('youtube_url', $youtube_url, $recipe_post_id);
@@ -88,7 +91,6 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       if(strpos($column, 'glutenfreeonashoestring.com') > -1 ){
         return true;
       }else{
-        
         return false;
       }
     }
@@ -125,13 +127,17 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
     }
 
     private function fetch_recipe($slug){
-      
+      $wprm_url ='http://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_recipe/?slug=wprm-'.$slug;
       $url = 'https://glutenfreeonashoestring.com/wp-json/wp/v2/posts/?slug='.$slug;
 
-      $raw_body = $this->fetch_data($url);
-
-      $recipe = new Recipe($raw_body);
-      return $recipe; //array
+      $wprm_recipe_raw_body = $this->fetch_data($wprm_url); // leave off the index [0] so we can check if it is set.
+      $wp_post_raw_body = $this->fetch_data($url)[0];
+      
+      /*
+        if this is a legacy recipe use the Recipe Class other wise use the new WPRM_RECIPE class
+       */
+      $recipe = isset( $wprm_recipe_raw_body[0] ) ? new WPRM_Recipe($wprm_recipe_raw_body[0], $wp_post_raw_body) : new Recipe($wp_post_raw_body);
+      return $recipe;
     }
 
     private function insert_recipe($data){
@@ -171,9 +177,9 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       $json_body = $json['body'];
       $raw_data = json_decode($json_body);
       if($raw_data){
-        return $raw_data[0];
+        return $raw_data;
       } else {
-        $this->error_obj[] = 'error: couldnt fetch post';
+        $this->error_obj[] = 'error: couldn\'t fetch post';
       }
     }
 
@@ -204,13 +210,13 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
     }
 
     private function recipe_exists($post_name) {
-    global $wpdb;
-    if($wpdb->get_row("SELECT post_name FROM wp_posts WHERE post_name = '" . $post_name . "'", 'ARRAY_A')) {
+      global $wpdb;
+      if($wpdb->get_row("SELECT post_name FROM wp_posts WHERE post_name = '" . $post_name . "'", 'ARRAY_A')) {
         return true;
-    } else {
+      } else {
         return false;
+      }
     }
-}
 
   }//end of class
 

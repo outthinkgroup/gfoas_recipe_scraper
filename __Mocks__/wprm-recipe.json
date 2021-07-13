@@ -1,0 +1,598 @@
+[
+  {
+    "id": 40475,
+    "date": "2021-07-07T10:29:31",
+    "date_gmt": "2021-07-07T14:29:31",
+    "guid": {
+      "rendered": "https://glutenfreeonashoestring.com/?post_type=wprm_recipe&#038;p=40475"
+    },
+    "modified": "2021-07-07T10:33:32",
+    "modified_gmt": "2021-07-07T14:33:32",
+    "slug": "wprm-gluten-free-flour-tortillas",
+    "status": "publish",
+    "type": "wprm_recipe",
+    "link": "https://glutenfreeonashoestring.com/gluten-free-flour-tortillas/",
+    "title": {
+      "rendered": "Gluten Free Flour Tortillas"
+    },
+    "content": {
+      "rendered": "<p>Soft, flexible gluten free flour tortillas are easy to make in any size, and they’re perfect anywhere you’d use a corn tortilla, plus for burritos, tacos, and wraps.</p>\n",
+      "protected": false
+    },
+    "author": 2,
+    "template": "",
+    "wprm_course": [463],
+    "wprm_cuisine": [327],
+    "wprm_keyword": [627, 628],
+    "wprm_ingredient": [395, 344, 334, 396, 626, 450, 343],
+    "wprm_equipment": [],
+    "wprm_nutrition_ingredient": [],
+    "recipe": {
+      "id": 40475,
+      "slug": "wprm-gluten-free-flour-tortillas",
+      "post_status": "publish",
+      "type": "food",
+      "image_id": 40474,
+      "image_url": "https://glutenfreeonashoestring.com/wp-content/uploads/2021/07/Hands-folding-tortilla-600x600-1.jpg",
+      "pin_image_id": "",
+      "pin_image_url": "https://glutenfreeonashoestring.com/wp-content/uploads/2021/07/Hands-folding-tortilla-600x600-1.jpg",
+      "name": "Gluten Free Flour Tortillas",
+      "summary": "<p>Soft, flexible gluten free flour tortillas are easy to make in any size, and they’re perfect anywhere you’d use a corn tortilla, plus for burritos, tacos, and wraps.</p>",
+      "author_display": "same",
+      "author_name": "",
+      "author_link": "",
+      "cost": "",
+      "servings": "4",
+      "servings_unit": "to 6 tortillas",
+      "prep_time": "30",
+      "prep_time_zero": "",
+      "cook_time": "10",
+      "cook_time_zero": "",
+      "total_time": "0",
+      "custom_time": "30",
+      "custom_time_zero": "",
+      "custom_time_label": "Resting time",
+      "tags": {
+        "course": [
+          {
+            "term_id": 463,
+            "name": "Bread",
+            "slug": "bread",
+            "term_group": 0,
+            "term_taxonomy_id": 463,
+            "taxonomy": "wprm_course",
+            "description": "",
+            "parent": 0,
+            "count": 1,
+            "filter": "raw"
+          }
+        ],
+        "cuisine": [
+          {
+            "term_id": 327,
+            "name": "Mexican",
+            "slug": "mexican",
+            "term_group": 0,
+            "term_taxonomy_id": 327,
+            "taxonomy": "wprm_cuisine",
+            "description": "",
+            "parent": 0,
+            "count": 2,
+            "filter": "raw"
+          }
+        ],
+        "keyword": [
+          {
+            "term_id": 627,
+            "name": "gluten free tortillas",
+            "slug": "gluten-free-tortillas",
+            "term_group": 0,
+            "term_taxonomy_id": 627,
+            "taxonomy": "wprm_keyword",
+            "description": "",
+            "parent": 0,
+            "count": 1,
+            "filter": "raw"
+          },
+          {
+            "term_id": 628,
+            "name": "gluten free wraps",
+            "slug": "gluten-free-wraps",
+            "term_group": 0,
+            "term_taxonomy_id": 628,
+            "taxonomy": "wprm_keyword",
+            "description": "",
+            "parent": 0,
+            "count": 1,
+            "filter": "raw"
+          }
+        ]
+      },
+      "equipment": [],
+      "ingredients": [
+        {
+          "ingredients": [
+            {
+              "amount": "1 1/2",
+              "unit": "cups",
+              "name": "all purpose gluten free flour blend",
+              "notes": "I used Better Batter; click for more info",
+              "converted": {
+                "2": {
+                  "amount": "210",
+                  "unit": "g"
+                }
+              },
+              "id": 395
+            },
+            {
+              "amount": "3/4",
+              "unit": "teaspoon",
+              "name": "xanthan gum",
+              "notes": "omit if your blend already contains it",
+              "id": 343
+            },
+            {
+              "amount": "5/8",
+              "unit": "cup",
+              "name": "tapioca starch/flour",
+              "notes": "plus more for sprinkling ",
+              "converted": {
+                "2": {
+                  "amount": "75",
+                  "unit": "g"
+                }
+              },
+              "id": 396
+            },
+            {
+              "amount": "1 1/2",
+              "unit": "teaspoons",
+              "name": "baking powder",
+              "notes": "",
+              "id": 344
+            },
+            {
+              "amount": "1",
+              "unit": "teaspoon",
+              "name": "kosher salt",
+              "notes": "",
+              "id": 334
+            },
+            {
+              "amount": "4",
+              "unit": "tablespoons",
+              "name": "virgin coconut oil",
+              "notes": "",
+              "converted": {
+                "2": {
+                  "amount": "48",
+                  "unit": "g"
+                }
+              },
+              "id": 450
+            },
+            {
+              "amount": "3/4",
+              "unit": "cup",
+              "name": "very warm water (about 90°F)",
+              "notes": "plus more by the tablespoon as necessary",
+              "converted": {
+                "2": {
+                  "amount": "6",
+                  "unit": "ounces"
+                }
+              },
+              "id": 626
+            }
+          ],
+          "name": ""
+        }
+      ],
+      "instructions": [
+        {
+          "instructions": [
+            {
+              "name": "",
+              "text": "<p>In a large bowl, place the all purpose gluten free flour blend, xanthan gum, tapioca starch/flour, baking powder, and salt, and whisk to combine. </p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>Add the coconut oil, and toss it in the dry ingredients. With the tines of a large fork, break up the fat into small pieces about the size of small peas. </p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>Create a well in the center of the mixture, the water, and mix to combine. The dough should be thick. If there are any crumbly bits at all, add the remaining water by the tablespoonful. </p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>Knead the dough together and press it into a ball, cover with a moist tea towel, and allow to sit for 20 to 30 minutes. The dough will stiffen a bit as it absorbs more of the water.</p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>Heat a 10- or 12-inch cast-iron skillet (or a nonstick skillet over medium heat) over medium-high heat. The skillet should be hot enough to sizzle when you drip water on it. </p>",
+              "image": 0
+            }
+          ],
+          "name": "Make the tortilla dough"
+        },
+        {
+          "instructions": [
+            {
+              "name": "",
+              "text": "<p>Divide the dough into four equal pieces. Work with one piece of dough at a time, and cover the rest with a moist tea towel or plastic wrap to prevent them from drying out. </p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>Sprinkle at least 1 tablespoon of extra tapioca starch on a flat surface, place the first piece of dough on top, and sprinkle again with more tapioca starch. With a rolling pin, roll out the dough about ¼-inch inch thick. </p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>If the dough seems smooth, proceed with the next step. If it doesn&#39;t seem smooth, but instead has what appears to be cracks, gather the dough together again, sprinkle with more tapioca starch, and roll it out again until it appears smooth.</p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>Using a cake cutter or freehand with a pizza wheel or sharp knife, cut out a round the size you&#39;d like. If you&#39;re making 9-inch or 10-inch rounds, you&#39;ll only cut out one from each piece of dough. Gather the scraps and set them aside with the other pieces of remaining dough. </p>",
+              "image": 0
+            }
+          ],
+          "name": "Shape the tortillas"
+        },
+        {
+          "instructions": [
+            {
+              "name": "",
+              "text": "<p>Place the rounds one at a time in the center of the hot skillet. Cook on one side until bubbles begin to appear on the top surface and the tortilla darkens in color a bit on the underside (about 45 seconds). </p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>Using a wide spatula, flip the tortilla over, and cook on the other side until more bubbles form and the tortilla darkens on the underside (about another 45 seconds). Press down on the top of the tortilla to help it sear a bit. Remove the tortilla from the pan, place on large tea towel, and cover gently.</p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>Repeat the process with the remaining pieces of dough, including gathering and rerolling all the scraps together.</p>",
+              "image": 0
+            }
+          ],
+          "name": "Cook the tortillas"
+        },
+        {
+          "instructions": [
+            {
+              "name": "",
+              "text": "<p>If you don’t plan to use the tortillas right away, place them, still wrapped in the towel, in a plastic bag to seal in the moisture. Use within a few hours.</p>",
+              "image": 0
+            },
+            {
+              "name": "",
+              "text": "<p>To freeze the tortillas, allow them to cool completely to room temperature. Stack them, wrap tightly with freezer-safe wrap, and freeze until you&#39;re ready to use. Allow to defrost at room temperature and refresh in a hot, dry skillet before serving.</p>",
+              "image": 0
+            }
+          ],
+          "name": "Make-ahead instructions"
+        }
+      ],
+      "ingredients_flat": [
+        {
+          "amount": "1 1/2",
+          "unit": "cups",
+          "name": "all purpose gluten free flour blend",
+          "notes": "I used Better Batter; click for more info",
+          "converted": {
+            "2": {
+              "amount": "210",
+              "unit": "g"
+            }
+          },
+          "id": 395,
+          "uid": 0,
+          "type": "ingredient"
+        },
+        {
+          "amount": "3/4",
+          "unit": "teaspoon",
+          "name": "xanthan gum",
+          "notes": "omit if your blend already contains it",
+          "id": 343,
+          "uid": 1,
+          "type": "ingredient"
+        },
+        {
+          "amount": "5/8",
+          "unit": "cup",
+          "name": "tapioca starch/flour",
+          "notes": "plus more for sprinkling ",
+          "converted": {
+            "2": {
+              "amount": "75",
+              "unit": "g"
+            }
+          },
+          "id": 396,
+          "uid": 2,
+          "type": "ingredient"
+        },
+        {
+          "amount": "1 1/2",
+          "unit": "teaspoons",
+          "name": "baking powder",
+          "notes": "",
+          "id": 344,
+          "uid": 3,
+          "type": "ingredient"
+        },
+        {
+          "amount": "1",
+          "unit": "teaspoon",
+          "name": "kosher salt",
+          "notes": "",
+          "id": 334,
+          "uid": 4,
+          "type": "ingredient"
+        },
+        {
+          "amount": "4",
+          "unit": "tablespoons",
+          "name": "virgin coconut oil",
+          "notes": "",
+          "converted": {
+            "2": {
+              "amount": "48",
+              "unit": "g"
+            }
+          },
+          "id": 450,
+          "uid": 5,
+          "type": "ingredient"
+        },
+        {
+          "amount": "3/4",
+          "unit": "cup",
+          "name": "very warm water (about 90°F)",
+          "notes": "plus more by the tablespoon as necessary",
+          "converted": {
+            "2": {
+              "amount": "6",
+              "unit": "ounces"
+            }
+          },
+          "id": 626,
+          "uid": 6,
+          "type": "ingredient"
+        }
+      ],
+      "instructions_flat": [
+        {
+          "name": "Make the tortilla dough",
+          "uid": 0,
+          "type": "group"
+        },
+        {
+          "name": "",
+          "text": "<p>In a large bowl, place the all purpose gluten free flour blend, xanthan gum, tapioca starch/flour, baking powder, and salt, and whisk to combine. </p>",
+          "image": 0,
+          "uid": 1,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>Add the coconut oil, and toss it in the dry ingredients. With the tines of a large fork, break up the fat into small pieces about the size of small peas. </p>",
+          "image": 0,
+          "uid": 2,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>Create a well in the center of the mixture, the water, and mix to combine. The dough should be thick. If there are any crumbly bits at all, add the remaining water by the tablespoonful. </p>",
+          "image": 0,
+          "uid": 3,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>Knead the dough together and press it into a ball, cover with a moist tea towel, and allow to sit for 20 to 30 minutes. The dough will stiffen a bit as it absorbs more of the water.</p>",
+          "image": 0,
+          "uid": 4,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>Heat a 10- or 12-inch cast-iron skillet (or a nonstick skillet over medium heat) over medium-high heat. The skillet should be hot enough to sizzle when you drip water on it. </p>",
+          "image": 0,
+          "uid": 5,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "Shape the tortillas",
+          "uid": 6,
+          "type": "group"
+        },
+        {
+          "name": "",
+          "text": "<p>Divide the dough into four equal pieces. Work with one piece of dough at a time, and cover the rest with a moist tea towel or plastic wrap to prevent them from drying out. </p>",
+          "image": 0,
+          "uid": 7,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>Sprinkle at least 1 tablespoon of extra tapioca starch on a flat surface, place the first piece of dough on top, and sprinkle again with more tapioca starch. With a rolling pin, roll out the dough about ¼-inch inch thick. </p>",
+          "image": 0,
+          "uid": 8,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>If the dough seems smooth, proceed with the next step. If it doesn&#39;t seem smooth, but instead has what appears to be cracks, gather the dough together again, sprinkle with more tapioca starch, and roll it out again until it appears smooth.</p>",
+          "image": 0,
+          "uid": 9,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>Using a cake cutter or freehand with a pizza wheel or sharp knife, cut out a round the size you&#39;d like. If you&#39;re making 9-inch or 10-inch rounds, you&#39;ll only cut out one from each piece of dough. Gather the scraps and set them aside with the other pieces of remaining dough. </p>",
+          "image": 0,
+          "uid": 10,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "Cook the tortillas",
+          "uid": 11,
+          "type": "group"
+        },
+        {
+          "name": "",
+          "text": "<p>Place the rounds one at a time in the center of the hot skillet. Cook on one side until bubbles begin to appear on the top surface and the tortilla darkens in color a bit on the underside (about 45 seconds). </p>",
+          "image": 0,
+          "uid": 12,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>Using a wide spatula, flip the tortilla over, and cook on the other side until more bubbles form and the tortilla darkens on the underside (about another 45 seconds). Press down on the top of the tortilla to help it sear a bit. Remove the tortilla from the pan, place on large tea towel, and cover gently.</p>",
+          "image": 0,
+          "uid": 13,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>Repeat the process with the remaining pieces of dough, including gathering and rerolling all the scraps together.</p>",
+          "image": 0,
+          "uid": 14,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "Make-ahead instructions",
+          "uid": 15,
+          "type": "group"
+        },
+        {
+          "name": "",
+          "text": "<p>If you don’t plan to use the tortillas right away, place them, still wrapped in the towel, in a plastic bag to seal in the moisture. Use within a few hours.</p>",
+          "image": 0,
+          "uid": 16,
+          "type": "instruction",
+          "image_url": ""
+        },
+        {
+          "name": "",
+          "text": "<p>To freeze the tortillas, allow them to cool completely to room temperature. Stack them, wrap tightly with freezer-safe wrap, and freeze until you&#39;re ready to use. Allow to defrost at room temperature and refresh in a hot, dry skillet before serving.</p>",
+          "image": 0,
+          "uid": 17,
+          "type": "instruction",
+          "image_url": ""
+        }
+      ],
+      "video_id": 0,
+      "video_embed": "",
+      "video_thumb_url": "https://glutenfreeonashoestring.com/wp-content/uploads/2021/07/Hands-folding-tortilla-600x600-1-150x150.jpg",
+      "notes": "<p>Adapted from <a title=\"Gluten-Free on a Shoestring Bakes Bread\" href=\"http://amzn.to/11HEbV9\" target=\"_blank\" rel=\"noopener nofollow\"><strong>Gluten-Free on a Shoestring Bakes Bread: Biscuits, Bagels, Buns, and More</strong></a> by Nicole Hunn. Excerpted by arrangement with Da Capo Lifelong, a member of the Perseus Books Group. Copyright © 2013; <br />Originally published on the blog in 2016. Recipe changed slightly to replace Expandex with tapioca starch and shortening with virgin coconut oil. Some photos and most text new.</p>\n",
+      "nutrition": [],
+      "custom_fields": [],
+      "ingredient_links_type": "global",
+      "unit_system": "default",
+      "my_emissions": ""
+    },
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_recipe/40475"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_recipe"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/types/wprm_recipe"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/users/2"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 0,
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_recipe/40475/revisions"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/media/40474"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/media?parent=40475"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "wprm_course",
+          "embeddable": true,
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_course?post=40475"
+        },
+        {
+          "taxonomy": "wprm_cuisine",
+          "embeddable": true,
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_cuisine?post=40475"
+        },
+        {
+          "taxonomy": "wprm_keyword",
+          "embeddable": true,
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_keyword?post=40475"
+        },
+        {
+          "taxonomy": "wprm_ingredient",
+          "embeddable": true,
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_ingredient?post=40475"
+        },
+        {
+          "taxonomy": "wprm_equipment",
+          "embeddable": true,
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_equipment?post=40475"
+        },
+        {
+          "taxonomy": "wprm_nutrition_ingredient",
+          "embeddable": true,
+          "href": "https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_nutrition_ingredient?post=40475"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+]

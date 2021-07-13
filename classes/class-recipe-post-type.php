@@ -34,7 +34,7 @@ class Recipe_Post_Type {
         'singular_name'         => _x( 'Recipe Category', 'Post type singular name', 'textdomain' ),
       ],
       'hierarchical'  =>  true
-
+      
     ]);
   }
   
