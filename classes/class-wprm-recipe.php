@@ -15,10 +15,10 @@ class WPRM_Recipe {
   //used to get the featured image if none is set;
   private $post_content;
 
-  public $error_obj =[]; 
+  public $error_obj =[];
 
   function __construct($wprm_body, $wp_post_body){
-    $this->set_wprm_fields($wprm_body); 
+    $this->set_wprm_fields($wprm_body);
     $this->set_post_fields($wp_post_body); //for things like categories and content
   }
 
@@ -33,7 +33,7 @@ class WPRM_Recipe {
     $this->prep_time = $wprm->prep_time . " minutes";
     $this->cook_time = $wprm->cook_time . " minutes";
     $this->image = $this->get_featured_image($wprm->image_url);
-    $this->yield = "Serves: " . $wprm->servings . "</br> Serving Size:" . $wprm->serving_size;
+    $this->yield = "Serves: " . $wprm->servings;
     $this->ingredients = $this->format_ingredients($wprm->ingredients_flat);
     $this->steps = $this->format_steps($wprm->instructions_flat);
     $this->recipe_notes = $wprm->notes;
@@ -72,10 +72,10 @@ class WPRM_Recipe {
         $returned_category_ids[] = $current_categories[$key]->term_id;
       }else{
         // add cat to ours
-        
+
         $new_cat_id = wp_insert_term(
-          $gfoas_cat->name,  
-          'recipe_category', 
+          $gfoas_cat->name,
+          'recipe_category',
           array(
             'slug'        => $gfoas_cat->slug,
           )
@@ -89,8 +89,8 @@ class WPRM_Recipe {
 
     return $returned_category_ids;
   }
-  
-  /* 
+
+  /*
   * Prepare Steps for ACF Repeater.
   */
   private function format_steps($steps ){
@@ -102,55 +102,55 @@ class WPRM_Recipe {
         continue; // Skipping the Groups
       }
 
-      if(isset($step->text) && $step->text!=="" ){
+      if(property_exists($step,'text') && $step->text!=="" ){
         $formatted_steps[] =  $step->text; //Assuming the text automatically has <p> tags
       }
     }
-    
+
     return $formatted_steps;
   }
-  
-  /* 
+
+  /*
   Recursive function to loop ingredients and create a formatted html list.
   */
   private function format_ingredients($ingredients, $depth=0) {
-    $ingredients_html = count($ingredients) <= 1 ? "" : "<ul>";
+    $ingredients_html = "";
 
     foreach($ingredients as $index=>$ingredient){
       $formatted_ingredient = "";
       $ingredient_type = "ingredient";
       // if Ingredient is type group it is a heading
-      if(isset($ingredient->type) && $ingredient->type == "group") {
+      if(property_exists($ingredient,"type") && $ingredient->type == "group") {
         $ingredient_type = "group";
         $formatted_ingredient = "<h4>" . $ingredient->name . "</h4> ";
       } else {
         $formatted_ingredient .= "<li>";
         // else its an ingredient
-        if(isset($ingredient->name) && $ingredient->name!=="" ){
+        if(property_exists($ingredient,"name") && $ingredient->name!=="" ){
           $ingredient_name = "";
-          
-          if(isset($ingredient->amount) && $ingredient->amount!=="" ){
-            $ingredient_name .= $ingredient->amount; 
-            $ingredient_name .= " " . $ingredient->unit; 
+
+          if(property_exists($ingredient,"amount") && $ingredient->amount!=="" ){
+            $ingredient_name .= $ingredient->amount;
+            $ingredient_name .= " " . $ingredient->unit;
           }
 
           $ingredient_name .= " $ingredient->name";
         }
-        
+
         // Notes
-        if( isset( $ingredient->notes ) && $ingredients->notes !== "" ){
+        if( property_exists( $ingredient,"notes" ) && $ingredients->notes !== "" ){
           $formatted_ingredient .= "<small>$ingredients->notes</small>";
         }
         $formatted_ingredient .= $ingredient_name."</li>";
       }
 
       $ingredients_html .= $formatted_ingredient;
-      
+
       // check to see whats next to close html tags if needed
       $next_ingredient = $ingredients[$index+1];
-      if( ( isset($next_ingredient->type) && $next_ingredient->type == "group" ) || $next_ingredient == null) {
+      if( ( property_exists($next_ingredient,"type") && $next_ingredient->type == "group" ) || $next_ingredient == null) {
         $ingredients_html .= "</ul>";
-      } 
+      }
       if($ingredient_type === "group") {
         $ingredients_html .= "<ul>";
       }
