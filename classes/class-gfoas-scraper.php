@@ -24,10 +24,10 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       $recipe_url = $_POST['recipe'];
       $youtube_url = $_POST['youtube'];
       
-      $recipe_post_id = $this->pull_and_save_recipe($recipe_url);
+      $recipe_post_id = $this->pull_and_save_recipe($recipe_url); // this could be null if there was an error
       
       if(count($this->error_obj)!==0){
-        do_action('qm/debug', $this->error_obj);
+        //do_action('qm/debug', $this->error_obj);//this is useful when testing
         echo json_encode(['message'=> $this->error_obj]);
       }else{
         update_field('youtube_url', $youtube_url, $recipe_post_id);
@@ -107,11 +107,13 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
       $slug = $this->get_slug($url);
 
       if($this->recipe_exists($slug)){
-
         $this->error_obj[] = $slug;
         $this->error_obj[] = 'error: Recipe already exists';
       } else {
         $recipe = $this->fetch_recipe($slug);
+        if(gettype($recipe)=='string'){
+          return;
+        }
         $post_id = $this->insert_recipe($recipe);
       }
       return $post_id;
@@ -127,17 +129,24 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
     }
 
     private function fetch_recipe($slug){
-      $wprm_url ='http://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_recipe/?slug=wprm-'.$slug;
-      $url = 'https://glutenfreeonashoestring.com/wp-json/wp/v2/posts/?slug='.$slug;
 
-      $wprm_recipe_raw_body = $this->fetch_data($wprm_url); // leave off the index [0] so we can check if it is set.
-      $wp_post_raw_body = $this->fetch_data($url)[0];
-      
-      /*
-        if this is a legacy recipe use the Recipe Class other wise use the new WPRM_RECIPE class
-       */
-      $recipe = isset( $wprm_recipe_raw_body[0] ) ? new WPRM_Recipe($wprm_recipe_raw_body[0], $wp_post_raw_body) : new Recipe($wp_post_raw_body);
-      return $recipe;
+      $url = 'https://glutenfreeonashoestring.com/wp-json/wp/v2/posts/?slug='.$slug;
+      $wp_post_raw_body = $this->fetch_data( $url )[ 0 ];//This is an array and we only want the first post
+
+      //if this is a legacy recipe we are done
+      if( $this->is_legacy_recipe() ) {
+        return new Recipe($wp_post_raw_body);
+      }
+
+      $wprm_url = $this->get_wpm_recipe_url($wp_post_raw_body);
+      $wprm_recipe_raw_body = $this->fetch_data($wprm_url);
+
+      if($wprm_recipe_raw_body == "error: couldn\'t fetch post" && $wp_post_raw_body == "error: couldn\'t fetch post"){
+        $this->error_obj[] = $wprm_recipe_raw_body;
+      }
+
+      $wprm_recipe = new WPRM_Recipe($wprm_recipe_raw_body, $wp_post_raw_body);
+      return $wprm_recipe;
     }
 
     private function insert_recipe($data){
@@ -171,15 +180,33 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
 
     }
 
-
-    function fetch_data($url){
+    public function fetch_data($url){
       $json = wp_remote_get($url);
+      if(is_wp_error($json)){
+        return "error: couldn\'t fetch post";
+      }
       $json_body = $json['body'];
       $raw_data = json_decode($json_body);
       if($raw_data){
         return $raw_data;
       } else {
-        $this->error_obj[] = 'error: couldn\'t fetch post';
+        return 'error: couldn\'t fetch post';
+      }
+    }
+
+    private function is_legacy_recipe(){
+      return isset($_POST['is_legacy']) && $_POST['is_legacy'] == 'true';
+    }
+
+    private function get_wpm_recipe_url($post){
+      require_once RECIPE_SCRAPER_PATH . '/includes/simple_html_dom.php';
+      $id = str_get_html($post->content->rendered)->find('[data-recipe]', 0)->attr['data-recipe'];
+
+      if($id){
+        $url = 'https://glutenfreeonashoestring.com/wp-json/wp/v2/wprm_recipe/'.$id;
+        return $url;
+      } else {
+        $this->error_obj[] = 'error: could not find wprm url';
       }
     }
 
@@ -198,6 +225,8 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
 
     private function set_featured_image($image_id, $post_id){
       if(gettype($image_id)=="string"){
+        
+        var_dump($image_id);
         $this->error_obj[] = "an error occured in Save_Media::save_to_media_library()";
         $this->error_obj[] = $image_id;
       }
@@ -211,6 +240,7 @@ if(!class_exists( 'GFOAS_SCRAPE' )){
 
     private function recipe_exists($post_name) {
       global $wpdb;
+
       if($wpdb->get_row("SELECT post_name FROM wp_posts WHERE post_name = '" . $post_name . "'", 'ARRAY_A')) {
         return true;
       } else {
@@ -275,8 +305,10 @@ class Recipe {
       $remote_image = $this->parse_content_for_image($post_content);
     }
     
-    $image_id = new Save_Media($remote_image, $this->slug);
-    return $image_id->get_image_id();
+    if($remote_image){
+      $image_id = new Save_Media($remote_image, $this->slug);
+      return $image_id->get_image_id();
+    }
     
   }
 
@@ -318,7 +350,6 @@ class Recipe {
         );
 
         //add id to return array
-
         $returned_category_ids[] = $new_cat_id['term_id'];
 
       }
@@ -333,13 +364,17 @@ class Recipe {
     foreach($steps as $step){
       $paragraph = $step->add_step;
       $cleaned_steps[] = str_replace(['<p>','</p>'],'',$paragraph);
-
     }
     return $cleaned_steps;
   }
 
   private function fetch_media_url($id){
+    //TODO add error handling
     $body = $this->fetch_data("https://glutenfreeonashoestring.com/wp-json/wp/v2/media/$id");
+    if($body == "error: couldn\'t fetch post"){
+      $this->error_obj[] = $wp_post_raw_body;
+      return;
+    }
     return $body->source_url;
   }
 
@@ -356,12 +391,16 @@ class Recipe {
 
   public function fetch_data($url){
     $json = wp_remote_get($url);
+    if(is_wp_error($json)){
+      $this->error_obj[] = $json->get_error_message();
+      return "error: couldn't fetch post";
+    }
     $json_body = $json['body'];
     $raw_data = json_decode($json_body);
     if($raw_data){
-      return $raw_data[0];
+      return $raw_data;
     } else {
-      $this->error_obj[] = 'error: couldnt fetch post';
+      $this->error_obj[] = 'error: couldnt hi fetch post';
     }
   }
 

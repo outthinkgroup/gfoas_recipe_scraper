@@ -18,9 +18,7 @@ if(!class_exists( 'Recipe_Scraper_Core' )){
       $this->add_scraper_ui_page();
 
       //TEST
-    //  include_once RECIPE_SCRAPER_PATH . '/__TEST__/index.php';
-
-
+      //include_once RECIPE_SCRAPER_PATH . '/__TEST__/index.php';
     }
 
     function add_recipe_post_type(){

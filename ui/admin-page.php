@@ -29,9 +29,16 @@
               <label for="youtube">
                 <p>
                   The url for the youtube video
+
                 </p>
               </label>
               <input type="url" name="youtubeurl" id="youtube"/>
+              <label for="is_legacy">
+                <p>
+                  Is this a legacy recipe?
+                </p >
+              <input type="checkbox" name="is_legacy" id="is_legacy"/>
+
             </fieldset>
             
             <button class="button-primary" type="submit">Pull Recipe</button>

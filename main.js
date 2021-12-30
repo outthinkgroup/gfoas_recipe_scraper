@@ -1,7 +1,7 @@
 import "./scripts/main.js";
 import "./styles/main.scss";
 
-const tabsTemplate = /* html */ `
+	const tabsTemplate = /* html */ `
 <style>
 .tabs-wrapper{
   background:#efefef;
