@@ -57,7 +57,6 @@ class Save_Media {
         $type      = $results['type']; // MIME type of the file
         
 
-
         $attachment = array(
           'guid'    => $local_url,
           'post_mime_type' => $wp_filetype['type'],

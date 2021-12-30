@@ -27,10 +27,14 @@ function initSingleRecipeScraper() {
     const youtube = form.querySelector("#youtube");
     const youtubeVal = youtube.value;
 
+    const isLegacy = form.querySelector("#is_legacy");
+    const isLegacyVal = isLegacy.checked;
+
     const data = {
       action: "GFOAS_scrape_single",
       recipe: recipeVal,
       youtube: youtubeVal,
+      is_legacy: isLegacyVal,
     };
 
     const body = toQueryString(data);

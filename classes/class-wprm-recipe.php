@@ -124,6 +124,10 @@ class WPRM_Recipe {
         $ingredient_type = "group";
         $formatted_ingredient = "<h4>" . $ingredient->name . "</h4> ";
       } else {
+        // if this is the first ingredient, add the <ul>
+        if($index == 0) {
+          $ingredients_html .= "<ul>";
+        }
         $formatted_ingredient .= "<li>";
         // else its an ingredient
         if(property_exists($ingredient,"name") && $ingredient->name!=="" ){
