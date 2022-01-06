@@ -111,7 +111,7 @@ class WPRM_Recipe {
   }
 
   /*
-  Recursive function to loop ingredients and create a formatted html list.
+  Function to loop ingredients and create a formatted html list.
   */
   private function format_ingredients($ingredients, $depth=0) {
     $ingredients_html = "";
@@ -134,17 +134,26 @@ class WPRM_Recipe {
           $ingredient_name = "";
 
           if(property_exists($ingredient,"amount") && $ingredient->amount!=="" ){
-            $ingredient_name .= $ingredient->amount;
-            $ingredient_name .= " " . $ingredient->unit;
+            $ingredient_amount = "";
+            $ingredient_amount .= $ingredient->amount;
+            $ingredient_amount .= " " . $ingredient->unit;
+
+            if (property_exists( $ingredient, "converted" ) ) {
+              $ingredient_amount .= " (" . $ingredient->converted->{"2"}->amount . " " . $ingredient->converted->{"2"}->unit . ")";
+            }
+
+
+            $ingredient_name .= $ingredient_amount;
           }
 
           $ingredient_name .= " $ingredient->name";
         }
 
         // Notes
-        if( property_exists( $ingredient,"notes" ) && $ingredients->notes !== "" ){
-          $formatted_ingredient .= "<small>$ingredients->notes</small>";
+        if( property_exists( $ingredient,"notes" ) && $ingredient->notes !== "" ){
+          $ingredient_name .= "<br/><small style=\"font-size:.8em; font-style:italic;\">$ingredient->notes</small>";
         }
+
         $formatted_ingredient .= $ingredient_name."</li>";
       }
 
